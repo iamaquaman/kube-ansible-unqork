@@ -1,0 +1,12 @@
+# master-playbook.yml
+---
+- import_playbook: playbooks/namespace.yml
+- import_playbook: playbooks/configmap.yml
+- import_playbook: playbooks/secret.yml
+
+- name: Deploy Redis
+  hosts: localhost
+  roles:
+    - roles/redis
+
+- import_playbook: playbooks/redis-hpa.yml

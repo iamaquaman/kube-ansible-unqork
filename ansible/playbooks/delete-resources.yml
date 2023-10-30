@@ -1,0 +1,65 @@
+# delete-resources.yml
+---
+- name: Delete Redis Horizontal Pod Autoscaler
+  hosts: localhost
+  tasks:
+    - name: Delete HPA
+      k8s:
+        state: absent
+        definition:
+          apiVersion: autoscaling/v1
+          kind: HorizontalPodAutoscaler
+          metadata:
+            name: redis-hpa
+            namespace: unqork-namespace
+
+- name: Delete Redis StatefulSet
+  hosts: localhost
+  tasks:
+    - name: Delete StatefulSet
+      k8s:
+        state: absent
+        definition:
+          apiVersion: apps/v1
+          kind: StatefulSet
+          metadata:
+            name: redis
+            namespace: unqork-namespace
+
+- name: Delete ConfigMap
+  hosts: localhost
+  tasks:
+    - name: Delete ConfigMap
+      k8s:
+        state: absent
+        definition:
+          apiVersion: v1
+          kind: ConfigMap
+          metadata:
+            name: unqork-config
+            namespace: unqork-namespace
+
+- name: Delete Secret
+  hosts: localhost
+  tasks:
+    - name: Delete Secret
+      k8s:
+        state: absent
+        definition:
+          apiVersion: v1
+          kind: Secret
+          metadata:
+            name: unqork-secret
+            namespace: unqork-namespace
+
+- name: Delete Namespace
+  hosts: localhost
+  tasks:
+    - name: Delete Namespace
+      k8s:
+        state: absent
+        definition:
+          apiVersion: v1
+          kind: Namespace
+          metadata:
+            name: unqork-namespace

@@ -1,0 +1,14 @@
+---
+- name: Create ConfigMap
+  hosts: localhost
+  tasks:
+    - name: Create a new ConfigMap
+      k8s:
+        namespace: unqork-namespace
+        definition:
+          apiVersion: v1
+          kind: ConfigMap
+          metadata:
+            name: unqork-config
+          data:
+            app-setting: "value"
