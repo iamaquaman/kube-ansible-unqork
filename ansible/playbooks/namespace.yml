@@ -1,0 +1,11 @@
+---
+- name: Create Namespace
+  hosts: localhost
+  tasks:
+    - name: Create a new namespace
+      k8s:
+        definition:
+          apiVersion: v1
+          kind: Namespace
+          metadata:
+            name: unqork-namespace
